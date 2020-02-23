@@ -8,7 +8,10 @@ The second method is the PageRank algorithm itself. The graph of pages is repres
 
 ## PageRank Formula
 
-$x_{k+1} = (1 − m)Ax_k + (1 − m)Dx_k + mSx_k$
+![x_{k+1} = (1 - m)Ax_k + (1 - m)Dx_k + mSx_k](https://render.githubusercontent.com/render/math?math=x_%7Bk%2B1%7D%20%3D%20(1%20-%20m)Ax_k%20%2B%20(1%20-%20m)Dx_k%20%2B%20mSx_k)
+
+[comment]: # (https://gist.github.com/a-rodin/fef3f543412d6e1ec5b6cf55bf197d7b)
+[comment]: # (https://alexanderrodin.com/github-latex-markdown)
 
 ```
 x: eigenvector
