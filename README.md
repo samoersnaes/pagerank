@@ -4,7 +4,7 @@ PageRank forms the core of Google's search algorithm, as it allows webpages to b
 
 This program was part of an assignment for my Linear Algebra and Optimization course, and it implements two methods of calculating the importance ranking. The first is called "random surfer", and as the name implies, it randomly follows links from one page to another, incrementing the importance score of that page each time it is visited. As the network of pages may not be a single component, there is some probability of instead teleporting to a random page to account for this. In this case, the probability (damping factor) is set to 15%.
 
-The second method is the PageRank algorithm itself. The graph of pages is represented as a square matrix, and the eigenvector of importance scores is approximated through the iterative formula below. Sample output is also shown, using the Gnutella graph found in the `data` folder. Additional context can be found starting from page 5 in the attached assignment, the eigenvector paper, and of course [Wikipedia (direct link)](https://en.wikipedia.org/wiki/PageRank).
+The second method is the PageRank algorithm itself. The graph of pages is represented as a square matrix, and the eigenvector of importance scores is approximated through the iterative formula below. Sample input and output is also shown below, using the example graph the Gnutella graph, both of which are in the `data` folder. Additional context can be found starting from page 5 in the attached assignment, the eigenvector paper, and of course [Wikipedia (direct link)](https://en.wikipedia.org/wiki/PageRank).
 
 ## PageRank Formula
 
@@ -19,10 +19,87 @@ k: iteration counter
 m: damping factor
 A: stochastic matrix
 D: dangling node matrix
-S: minimum probability matrix
+S: "lowest score" matrix
 ```
 
-## Sample Output
+## Usage
+
+```
+python3 pagerank.py <file>
+```
+
+The filepath to the dataset must be provided as the one and only command line argument to the program. The data must be in the form of integer edge pairs, one pair per line. The file may contain comments, and the separator can be (relatively) arbitrary, so long as a consisent delimiter is used. Multiple edges between the same two nodes are allowed, but the additional edges are ignored. Reflexive edges are likewise allowed but removed. See sample datasets in the `data` directory.
+
+## Example Input
+
+```
+# 4 nodes
+0 1
+0 2
+1 2
+2 0
+2 3
+3 1
+```
+
+## Example Output
+
+```
+##########
+
+m = 0.15
+MIN_SCORE: 10000
+
+Most visited nodes according to random surfer:
+
+Time: 0.470912
+Iterations: 28455 (total score)
+Normalized score: 1.000000
+
+Node 2 (normalized: 0.351432; score: 10000)
+Node 1 (normalized: 0.273730; score:  7789)
+Node 0 (normalized: 0.187735; score:  5342)
+Node 3 (normalized: 0.187102; score:  5324)
+
+##########
+
+m = 0.15
+DELTA_NORMAL: 1e-06
+
+Highest ranking nodes according to PageRank:
+
+Time: 0.000919
+Iterations: 41
+Stable at: 3
+Sum of scores: 1.000000
+
+Node 2 (score: 0.351058)
+Node 1 (score: 0.275543)
+Node 0 (score: 0.186700)
+Node 3 (score: 0.186700)
+
+##########
+
+Top 4 nodes for PageRank and random surfer respectively:
+
+[2, 1, 0, 3]
+[2, 1, 0, 3]
+
+##########
+
+Absolute differences between the top 4 nodes:
+(Using top nodes of PageRank as point of comparison)
+
+Node 2 (difference: 0.000374)
+Node 1 (difference: 0.001812)
+Node 0 (difference: 0.001035)
+Node 3 (difference: 0.000403)
+
+Greatest absolute difference: 0.001812
+Sum of differences: 0.003624
+```
+
+## Sample Gnutella Output
 
 ```
 ##########
