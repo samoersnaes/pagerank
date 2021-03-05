@@ -1,10 +1,14 @@
 # PageRank
 
-PageRank forms the core of Google's search algorithm, as it allows webpages to be ranked in order of their relative importance to each other. Due to the self-referential nature of this importance ranking---a page's importance is dependent on the importance of the pages that link to it, and the page itself gives its importance to the pages it links to---representing the pages (nodes) as a matrix of directed links (edges) is a particularly useful and efficient way to solve the problem.
+PageRank forms the core of Google's search algorithm, as it allows webpages to be ranked in order of their relative importance to each other. Due to the self-referential nature of this importance ranking, representing the pages (nodes) as a matrix of directed links (edges) is a particularly useful and efficient way to solve the problem.
 
-This program was part of an assignment for my Linear Algebra and Optimization course, and it implements two methods of calculating the importance ranking. The first is called "random surfer", and as the name implies, it randomly follows links from one page to another, incrementing the importance score of that page each time it is visited. As the network of pages may not be a single component, there is some probability of instead teleporting to a random page to account for this. In this case, the probability (damping factor) is set to 15%.
+This program was part of an assignment for my Linear Algebra and Optimization course, and it implements two methods of calculating the importance ranking. The first is called "random surfer," and as the name implies, it randomly follows links from one page to another, incrementing the importance score of that page each time it is visited. As the network of pages may not be a single component, there is some probability of instead teleporting to a random page to account for this. In this case, the probability (damping factor) is set to 15%.
 
-The second method is the PageRank algorithm itself. The graph of pages is represented as a square matrix, and the eigenvector of importance scores is approximated through the iterative formula below. Sample input and output is also shown below, using the example graph the Gnutella graph, both of which are in the `data` folder. Additional context can be found starting from page 5 in the attached assignment, the eigenvector paper, and of course [Wikipedia (direct link)](https://en.wikipedia.org/wiki/PageRank).
+The second method is the PageRank algorithm itself. The graph of pages is represented as a square matrix, and the eigenvector of importance scores is approximated through the iterative formula below. Sample input and output is also shown below, using the example graph the Gnutella graph, both of which are in the `data` folder. Additional context can be found starting from page 5 in the attached assignment, the eigenvector paper, and of course [Wikipedia](https://en.wikipedia.org/wiki/PageRank).
+
+## Disclaimer
+
+While the code works, the style is not the cleanest. Also, using `numpy` instead of Python's built-in types would increase the speed of the PageRank algorithm by at least an order of magnitude.
 
 ## PageRank Formula
 
@@ -28,7 +32,7 @@ S: "lowest score" matrix
 python3 pagerank.py <file>
 ```
 
-The filepath to the dataset must be provided as the one and only command line argument to the program. The data must be in the form of integer edge pairs, one pair per line. The file may contain comments, and the separator can be (relatively) arbitrary, so long as a consisent delimiter is used. Multiple edges between the same two nodes are allowed, but the additional edges are ignored. Reflexive edges are likewise allowed but removed. See sample datasets in the `data` directory.
+The filepath to the dataset must be provided as the one and only command line argument to the program. The data must be in the form of integer edge pairs, one pair per line. The file may contain comments, and the separator can be (relatively) arbitrary, so long as a consisent delimiter is used. Multiple edges between the same two nodes are allowed, but the additional edges are ignored. Reflexive edges are likewise allowed but ignored. See sample datasets in the `data` directory.
 
 ## Example Input
 
